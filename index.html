@@ -22,9 +22,7 @@
   .eyebrow{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:0 0 12px}
   h1{font-size:40px;font-weight:900;line-height:1.02;letter-spacing:-.03em;color:var(--white);margin:0 0 20px}
   .lead{margin:0 0 12px}
-  .rule{display:flex;gap:12px;align-items:stretch;margin:28px 0 36px}
-  .rule div{flex:1;border:1px solid var(--fern);border-radius:10px;padding:14px 16px;font-size:14px;line-height:1.45}
-  .rule b{display:block;color:var(--white);font-size:22px;font-weight:700;margin-bottom:4px}
+  #intro{margin-bottom:32px}
   form{background:var(--canopy);border:1px solid var(--fern);border-radius:12px;padding:24px 20px}
   .field{margin-bottom:22px}
   label.t,legend{display:block;font-weight:600;color:var(--white);margin-bottom:8px;padding:0;font-size:15px}
@@ -50,7 +48,7 @@
   .done{display:none;text-align:left}
   .done h2{font-size:28px;font-weight:700;color:var(--white);margin:0 0 12px;letter-spacing:-.02em}
   .foot{color:var(--slate);font-size:13px;margin-top:28px}
-  @media (max-width:420px){ h1{font-size:34px} .rule{flex-direction:column} }
+  @media (max-width:420px){ h1{font-size:34px} }
 </style>
 </head>
 <body>
@@ -61,11 +59,7 @@
     <p class="eyebrow">Consultoria ao vivo · bônus da sua compra</p>
     <h1>Inscrição pra consultoria em grupo</h1>
     <p class="lead">Você comprou entre os primeiros e tem direito à consultoria ao vivo comigo. Ela acontece em grupo, pelo Google Meet, no começo de dezembro.</p>
-    <p class="lead">Pra eu marcar a data que encaixa mais gente, me diga em quais horários você consegue participar.<span id="prazo"></span></p>
-    <div class="rule">
-      <div><b>até 25</b>inscritos: uma data só, a que reunir mais gente</div>
-      <div><b>mais de 25</b>: duas datas, uma em cada semana</div>
-    </div>
+    <p class="lead">Pra eu marcar a data, me diga em quais horários você consegue participar.<span id="prazo"></span></p>
   </section>
 
   <form id="f" novalidate>
@@ -87,13 +81,8 @@
     <fieldset class="field" id="horarios" data-req>
       <legend>Em quais horários você consegue participar? <span class="hint">· marque todos que funcionam</span></legend>
       <div id="opts"></div>
-      <label class="opt"><input type="checkbox" name="horario" value="nenhum"><span>Nenhum desses funciona</span></label>
       <div class="err">Marque pelo menos uma opção.</div>
     </fieldset>
-    <div class="field" id="outro-wrap" style="display:none">
-      <label class="t" for="outro">Qual dia e horário funcionariam pra você?</label>
-      <input id="outro" name="outro" type="text">
-    </div>
     <div class="field">
       <label class="t" for="levar">O que você quer levar pra consultoria? <span class="hint">· opcional</span></label>
       <textarea id="levar" name="levar" placeholder="Uma dúvida, um desafio do seu trabalho agora, um tema que quer ver..."></textarea>
@@ -129,13 +118,6 @@ $("#opts").innerHTML = CONFIG.horarios.map(h =>
   `<label class="opt"><input type="checkbox" name="horario" value="${h.id}"><span>${h.label}</span><small>${h.hora}</small></label>`).join("");
 if (CONFIG.prazo) $("#prazo").textContent = ` Inscrições até ${CONFIG.prazo}.`;
 
-const nenhum = document.querySelector('input[value="nenhum"]');
-document.querySelectorAll('input[name=horario]').forEach(c => c.addEventListener("change", () => {
-  if (c === nenhum && c.checked) document.querySelectorAll('input[name=horario]').forEach(o => { if (o !== nenhum) o.checked = false; });
-  if (c !== nenhum && c.checked) nenhum.checked = false;
-  $("#outro-wrap").style.display = nenhum.checked ? "" : "none";
-}));
-
 const params = new URLSearchParams(location.search);
 
 $("#f").addEventListener("submit", async ev => {
@@ -163,7 +145,6 @@ $("#f").addEventListener("submit", async ev => {
     email: f.email.value.trim().toLowerCase(),
     whatsapp: f.whatsapp.value.trim(),
     horarios: marcados.join(", "),
-    outro: f.outro.value.trim(),
     levar: f.levar.value.trim(),
     origem: params.get("o") || "",
   });
