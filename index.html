@@ -16,47 +16,57 @@
     --cloud:#EBF0F1; --white:#FFFFFF; --slate:#9AADB0;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;background:var(--forest);color:var(--cloud);font-family:Figtree,system-ui,sans-serif;font-size:16px;line-height:1.65}
-  .wrap{max-width:560px;margin:0 auto;padding:40px 20px 64px}
-  .logo{width:56px;height:auto;display:block;margin-bottom:40px}
-  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:0 0 12px}
-  h1{font-size:40px;font-weight:900;line-height:1.02;letter-spacing:-.03em;color:var(--white);margin:0 0 20px}
-  .lead{margin:0 0 12px}
-  #intro{margin-bottom:32px}
-  form{background:var(--canopy);border:1px solid var(--fern);border-radius:12px;padding:24px 20px}
-  .field{margin-bottom:22px}
-  label.t,legend{display:block;font-weight:600;color:var(--white);margin-bottom:8px;padding:0;font-size:15px}
-  .hint{font-weight:400;color:var(--slate);font-size:13px}
-  input[type=text],input[type=email],input[type=tel],textarea{
-    width:100%;background:var(--forest);border:1px solid var(--fern);border-radius:8px;
-    color:var(--cloud);font:inherit;padding:12px 14px;outline:none}
-  input:focus,textarea:focus{border-color:var(--slate)}
-  textarea{min-height:96px;resize:vertical}
-  fieldset{border:0;margin:0;padding:0}
-  .opt{display:block;border:1px solid var(--fern);border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer}
+  html,body{margin:0;background:var(--forest);color:var(--cloud);font-family:Figtree,system-ui,sans-serif;font-size:16px;line-height:1.6}
+  .wrap{max-width:560px;margin:0 auto;padding:24px 16px 56px}
+  .logo{width:40px;height:auto;display:block;margin-bottom:20px}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:0 0 8px}
+  h1{font-size:30px;font-weight:900;line-height:1.05;letter-spacing:-.03em;color:var(--white);margin:0 0 10px}
+  .lead{margin:0 0 18px;font-size:15px}
+  .card{background:var(--canopy);border:1px solid var(--fern);border-radius:12px;padding:18px 16px}
+  .card + .card{margin-top:14px}
+  .titulo{font-weight:600;color:var(--white);margin:0 0 10px;font-size:15px}
+  .opt{display:block;border:1px solid var(--fern);border-radius:8px;padding:12px 14px;margin-bottom:10px;cursor:pointer;background:var(--forest)}
   .opt:has(input:checked){border-color:var(--slate)}
   .opt.cheia{opacity:.5;cursor:not-allowed}
   .opt-top{display:flex;gap:12px;align-items:center}
   .opt input{width:18px;height:18px;accent-color:var(--lime);margin:0;flex:none}
   .opt .dia{font-weight:600;color:var(--white)}
   .opt .hora{color:var(--slate);font-size:14px;margin-left:auto}
-  .barra{height:6px;background:var(--forest);border-radius:3px;margin:12px 0 6px;overflow:hidden}
+  .barra{display:block;height:5px;background:var(--canopy);border-radius:3px;margin:10px 0 4px;overflow:hidden}
   .barra i{display:block;height:100%;width:0;background:var(--slate);border-radius:3px;transition:width .4s}
   .cont{font-size:13px;color:var(--slate)}
-  .aviso{font-size:13px;color:var(--slate);margin:4px 0 0}
+  .field{margin-bottom:18px}
+  label.t{display:block;font-weight:600;color:var(--white);margin-bottom:6px;font-size:15px}
+  .hint{font-weight:400;color:var(--slate);font-size:13px}
+  .nota{font-size:13px;color:var(--slate);margin:6px 0 0}
+  input[type=text],input[type=email],input[type=tel],textarea{
+    width:100%;background:var(--forest);border:1px solid var(--fern);border-radius:8px;
+    color:var(--cloud);font:inherit;padding:12px 14px;outline:none}
+  input:focus,textarea:focus{border-color:var(--slate)}
+  input[readonly]{opacity:.7}
+  textarea{min-height:90px;resize:vertical}
   .err{color:var(--sprout);font-size:13px;margin-top:6px;display:none}
-  .field.bad .err{display:block}
-  .field.bad input{border-color:var(--slate)}
+  .bad .err{display:block}
+  .bad input{border-color:var(--slate)}
   button{width:100%;background:var(--lime);color:var(--forest);border:0;border-radius:8px;
     font:inherit;font-weight:700;font-size:16px;padding:14px 18px;cursor:pointer}
   button:hover{background:var(--sprout)}
   button[disabled]{opacity:.6;cursor:wait}
+  .link{background:none;border:0;color:var(--slate);text-decoration:underline;font-size:13px;padding:0;width:auto;font-weight:500}
+  .link:hover{background:none;color:var(--white)}
+  .escolhida{display:flex;align-items:center;gap:10px;margin:0 0 18px;padding:10px 14px;border:1px solid var(--fern);border-radius:8px;font-size:14px}
+  .escolhida b{color:var(--white);font-weight:600}
+  .escolhida .link{margin-left:auto}
+  .fora{display:none;margin-top:16px;border-top:1px solid var(--fern);padding-top:16px}
+  .fora p{margin:0 0 10px;font-size:15px}
+  .btn2{display:block;text-align:center;border:1px solid var(--slate);color:var(--white);border-radius:8px;padding:12px 18px;font-weight:600;text-decoration:none}
+  .btn2:hover{border-color:var(--white)}
+  .ja{font-size:14px;margin:0 0 16px;padding:10px 14px;border:1px solid var(--fern);border-radius:8px}
   .hp{position:absolute;left:-9999px}
-  .box{display:none;background:var(--canopy);border:1px solid var(--fern);border-radius:12px;padding:24px 20px}
-  .box h2{font-size:26px;font-weight:700;color:var(--white);margin:0 0 10px;letter-spacing:-.02em}
+  .box h2{font-size:24px;font-weight:700;color:var(--white);margin:0 0 8px;letter-spacing:-.02em}
   .box p{margin:0}
-  .foot{color:var(--slate);font-size:13px;margin-top:28px}
-  @media (max-width:420px){ h1{font-size:34px} }
+  .oculto{display:none}
+  .foot{color:var(--slate);font-size:13px;margin-top:24px}
 </style>
 </head>
 <body>
@@ -65,47 +75,68 @@
 
   <section id="intro">
     <p class="eyebrow">Consultoria ao vivo · bônus da sua compra</p>
-    <h1>Inscrição pra consultoria em grupo</h1>
-    <p class="lead">Como você foi um dos primeiros a comprar o Full Stack Marketing, tem vaga garantida na consultoria em grupo comigo, ao vivo pelo Google Meet.</p>
-    <p class="lead">Escolha uma das datas abaixo e faça sua inscrição.<span id="prazo"></span></p>
+    <h1>Consultoria em grupo com o Arthur</h1>
+    <p class="lead">Ao vivo, pelo Google Meet, pra quem foi um dos primeiros a comprar o Full Stack Marketing. Escolha uma data e garanta sua vaga.<span id="prazo"></span></p>
   </section>
 
-  <section class="box" id="lotado">
+  <!-- 1. escolher a data -->
+  <section class="card" id="passo-data">
+    <p class="titulo">Em qual data você quer participar?</p>
+    <div id="datas"></div>
+    <div class="field" id="data-wrap" style="margin:0"><div class="err">Escolha uma data com vaga.</div></div>
+    <button id="ir" type="button" style="margin-top:6px">Fazer minha inscrição</button>
+  </section>
+
+  <section class="card box oculto" id="lotado">
     <h2>Todas as vagas foram preenchidas.</h2>
     <p>Em breve liberaremos uma nova data e avisaremos por e-mail quem ainda não se inscreveu.</p>
   </section>
 
-  <form id="f" novalidate>
-    <fieldset class="field" id="datas-wrap">
-      <legend>Em qual data você quer participar?</legend>
-      <div id="datas"></div>
-      <div class="err">Escolha uma data com vaga.</div>
-    </fieldset>
-    <div class="field" data-req>
+  <!-- 2. confirmar o e-mail da compra -->
+  <form class="card oculto" id="gate" novalidate>
+    <div class="field" id="gate-field" style="margin-bottom:14px">
+      <label class="t" for="gemail">E-mail que você usou na compra</label>
+      <input id="gemail" type="email" autocomplete="email" inputmode="email" placeholder="seuemail@exemplo.com">
+      <p class="nota">Use o mesmo e-mail da compra na Hotmart. É por ele que eu confirmo que a vaga é sua.</p>
+      <div class="err" id="gerr">Coloque um e-mail válido.</div>
+    </div>
+    <button id="gbtn" type="submit">Continuar</button>
+    <div class="fora" id="fora">
+      <p>Não achei esse e-mail na lista de quem tem direito à consultoria.</p>
+      <p>Confira se é mesmo o e-mail que você usou na compra. Se for, e ainda assim não funcionar, fale com o Tiago pelo WhatsApp que ele resolve.</p>
+      <a class="btn2" id="wa" target="_blank" rel="noopener">Falar com o Tiago no WhatsApp</a>
+    </div>
+  </form>
+
+  <!-- 3. dados da inscrição -->
+  <form class="card oculto" id="f" novalidate>
+    <p class="ja oculto" id="ja"></p>
+    <div class="escolhida"><span>Data: <b id="escolhida-txt"></b></span><button class="link" type="button" id="trocar">trocar</button></div>
+    <div class="field">
       <label class="t" for="nome">Nome</label>
       <input id="nome" name="nome" type="text" autocomplete="name">
       <div class="err">Coloque seu nome.</div>
     </div>
-    <div class="field" data-req>
-      <label class="t" for="email">E-mail usado na compra <span class="hint">· é por ele que eu confirmo sua vaga</span></label>
-      <input id="email" name="email" type="email" autocomplete="email" inputmode="email">
-      <div class="err">Coloque um e-mail válido.</div>
-    </div>
-    <div class="field" data-req>
+    <div class="field">
       <label class="t" for="whatsapp">WhatsApp com DDD</label>
       <input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999">
       <div class="err">Coloque seu WhatsApp com DDD.</div>
     </div>
     <div class="field">
+      <label class="t" for="email">E-mail da compra</label>
+      <input id="email" name="email" type="email" readonly>
+    </div>
+    <div class="field">
       <label class="t" for="levar">O que você quer levar pra consultoria? <span class="hint">· opcional</span></label>
       <textarea id="levar" name="levar" placeholder="Uma dúvida, um desafio do seu trabalho agora, um tema que quer ver..."></textarea>
+      <p class="nota">Isso me ajuda a entender o que vocês estão buscando e a preparar melhor a consultoria.</p>
     </div>
     <input class="hp" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <button id="enviar" type="submit">Quero me inscrever</button>
+    <button id="enviar" type="submit">Confirmar inscrição</button>
     <div class="err" id="falha" style="margin-top:12px">Não consegui enviar. Confira sua conexão e tente de novo.</div>
   </form>
 
-  <section class="box" id="done">
+  <section class="card box oculto" id="done">
     <h2>Inscrição feita.</h2>
     <p id="done-txt"></p>
   </section>
@@ -114,19 +145,26 @@
 </main>
 
 <script>
-/* CONFIG: as datas (o id tem que ser igual ao DATAS do Apps Script), o prazo e o endereço do Apps Script */
+/* CONFIG: as datas (o id tem que ser igual ao DATAS do Apps Script), o prazo, o WhatsApp do Tiago e o Apps Script */
 const CONFIG = {
   datas: [
     { id: "ter-01-12", dia: "Terça, 01/12", hora: "19h" },
     { id: "qui-03-12", dia: "Quinta, 03/12", hora: "19h" },
   ],
-  prazo: "",          // ex: "20/11" (aparece no texto; vazio = não mostra)
+  prazo: "",                    // ex: "20/11" (aparece no texto; vazio = não mostra)
+  whatsapp: "5537988407074",    // Tiago, pra quem não passa no verificador
   endpoint: "https://script.google.com/macros/s/AKfycbywxvZ5NjsvxfERED9iVX2tXnZItdDBMDoDXFC30SPAqGFDimf7UFlO06BXEcYxIx2A/exec",
 };
+const TESTE = "tiagomelolemos@gmail.com";
 
 const $ = s => document.querySelector(s);
+const mostra = (id, sim = true) => $(id).classList.toggle("oculto", !sim);
 const params = new URLSearchParams(location.search);
+const dataDe = id => CONFIG.datas.find(d => d.id === id);
+let vagas = {}, teste = false;
+
 if (CONFIG.prazo) $("#prazo").textContent = ` Inscrições até ${CONFIG.prazo}.`;
+$("#wa").href = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent("Oi, Tiago! Tentei garantir minha vaga na consultoria, mas não consegui.");
 
 $("#datas").innerHTML = CONFIG.datas.map(d => `
   <label class="opt" id="opt-${d.id}">
@@ -135,11 +173,10 @@ $("#datas").innerHTML = CONFIG.datas.map(d => `
     <span class="cont">Carregando vagas...</span>
   </label>`).join("");
 
-let vagas = {};
 async function carregar() {
   try {
-    const r = await fetch(CONFIG.endpoint + "?t=" + Date.now());
-    vagas = await r.json();
+    const j = await (await fetch(CONFIG.endpoint + "?t=" + Date.now())).json();
+    vagas = j.vagas || j;
   } catch (e) { return; }
   let livres = 0;
   for (const d of CONFIG.datas) {
@@ -150,39 +187,80 @@ async function carregar() {
     opt.querySelector(".cont").textContent = resta === 0
       ? `Vagas preenchidas · ${v.inscritos} inscritos`
       : `${v.inscritos} de ${v.vagas} vagas preenchidas · ${resta === 1 ? "resta 1 vaga" : "restam " + resta + " vagas"}`;
-    opt.classList.toggle("cheia", resta === 0);
-    radio.disabled = resta === 0;
-    if (resta === 0) radio.checked = false;
+    opt.classList.toggle("cheia", resta === 0 && !teste);
+    radio.disabled = resta === 0 && !teste;
+    if (radio.disabled) radio.checked = false;
     livres += resta;
   }
-  if (livres === 0 && Object.keys(vagas).length && $("#done").style.display !== "block") {
-    $("#f").style.display = "none"; $("#lotado").style.display = "block";
+  if (livres === 0 && Object.keys(vagas).length && !teste && $("#done").classList.contains("oculto")) {
+    ["#passo-data", "#gate", "#f"].forEach(id => mostra(id, false)); mostra("#lotado");
   }
 }
 carregar();
 setInterval(carregar, 30000);
 
+// 1 -> 2: escolheu a data, confere o e-mail
+$("#ir").addEventListener("click", () => {
+  const escolhida = document.querySelector('input[name=data]:checked');
+  $("#data-wrap").classList.toggle("bad", !escolhida);
+  if (!escolhida) return;
+  if ($("#email").value) return irProForm();          // já passou no verificador antes (voltou pra trocar a data)
+  mostra("#passo-data", false); mostra("#gate");
+  $("#gemail").focus();
+});
+
+// 2 -> 3: e-mail na lista
+$("#gate").addEventListener("submit", async ev => {
+  ev.preventDefault();
+  const email = $("#gemail").value.trim().toLowerCase();
+  const valido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  $("#gerr").textContent = "Coloque um e-mail válido.";
+  $("#gate-field").classList.toggle("bad", !valido);
+  if (!valido) return;
+  const btn = $("#gbtn"); btn.disabled = true; btn.textContent = "Conferindo...";
+  $("#fora").style.display = "none";
+  try {
+    const j = await (await fetch(CONFIG.endpoint + "?email=" + encodeURIComponent(email) + "&t=" + Date.now())).json();
+    if (!j.ok) { $("#fora").style.display = "block"; return; }
+    teste = email === TESTE;
+    $("#email").value = email;
+    if (j.nome && !$("#nome").value) $("#nome").value = j.nome;
+    if (j.inscrito && dataDe(j.inscrito)) {
+      $("#ja").textContent = `Você já está inscrito na ${dataDe(j.inscrito).dia.toLowerCase()}. Se confirmar de novo, sua inscrição passa pra data escolhida abaixo.`;
+      mostra("#ja");
+    }
+    irProForm();
+  } catch (e) {
+    $("#gerr").textContent = "Não consegui conferir agora. Tente de novo em instantes.";
+    $("#gate-field").classList.add("bad");
+  } finally { btn.disabled = false; btn.textContent = "Continuar"; }
+});
+
+function irProForm() {
+  const d = dataDe(document.querySelector('input[name=data]:checked').value);
+  $("#escolhida-txt").textContent = `${d.dia}, às ${d.hora}`;
+  mostra("#passo-data", false); mostra("#gate", false); mostra("#f");
+  window.scrollTo(0, 0);
+}
+
+$("#trocar").addEventListener("click", () => { mostra("#f", false); mostra("#passo-data"); });
+
+// 3: envia
 $("#f").addEventListener("submit", async ev => {
   ev.preventDefault();
   const f = ev.target;
   if (f.site.value) return;
-  const escolhida = document.querySelector('input[name=data]:checked');
   const checks = {
-    data: !!escolhida,
     nome: f.nome.value.trim().length > 1,
-    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim()),
     whatsapp: f.whatsapp.value.replace(/\D/g, "").length >= 10,
   };
   let ok = true;
-  for (const [k, v] of Object.entries(checks)) {
-    const el = k === "data" ? $("#datas-wrap") : f[k].closest(".field");
-    el.classList.toggle("bad", !v); if (!v) ok = false;
-  }
-  if (!ok) { document.querySelector(".bad").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+  for (const [k, v] of Object.entries(checks)) { f[k].closest(".field").classList.toggle("bad", !v); if (!v) ok = false; }
+  if (!ok) { document.querySelector("#f .bad").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
 
+  const d = dataDe(document.querySelector('input[name=data]:checked').value);
   const btn = $("#enviar"); btn.disabled = true; btn.textContent = "Enviando...";
   $("#falha").style.display = "none";
-  const d = CONFIG.datas.find(x => x.id === escolhida.value);
   const body = new URLSearchParams({
     nome: f.nome.value.trim(),
     email: f.email.value.trim().toLowerCase(),
@@ -193,11 +271,11 @@ $("#f").addEventListener("submit", async ev => {
   });
   try {
     await fetch(CONFIG.endpoint, { method: "POST", mode: "no-cors", body });
-    $("#f").style.display = "none"; $("#intro").style.display = "none";
+    mostra("#f", false); mostra("#intro", false);
     $("#done-txt").textContent = `Sua vaga é na ${d.dia.toLowerCase()}, às ${d.hora}. Perto da data, eu te mando o link do encontro por e-mail e WhatsApp.`;
-    $("#done").style.display = "block"; window.scrollTo(0, 0);
+    mostra("#done"); window.scrollTo(0, 0);
   } catch (e) {
-    btn.disabled = false; btn.textContent = "Quero me inscrever";
+    btn.disabled = false; btn.textContent = "Confirmar inscrição";
     $("#falha").style.display = "block";
   }
 });
