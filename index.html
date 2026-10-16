@@ -8,7 +8,7 @@
 <link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,900;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --forest:#041B15; --canopy:#072B20; --fern:#1A5440;
@@ -33,20 +33,28 @@
   input:focus,textarea:focus{border-color:var(--slate)}
   textarea{min-height:96px;resize:vertical}
   fieldset{border:0;margin:0;padding:0}
-  .opt{display:flex;gap:12px;align-items:center;border:1px solid var(--fern);border-radius:8px;padding:12px 14px;margin-bottom:8px;cursor:pointer}
+  .opt{display:block;border:1px solid var(--fern);border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer}
+  .opt:has(input:checked){border-color:var(--slate)}
+  .opt.cheia{opacity:.5;cursor:not-allowed}
+  .opt-top{display:flex;gap:12px;align-items:center}
   .opt input{width:18px;height:18px;accent-color:var(--lime);margin:0;flex:none}
-  .opt span{font-weight:500}
-  .opt small{color:var(--slate);font-size:13px;margin-left:auto}
+  .opt .dia{font-weight:600;color:var(--white)}
+  .opt .hora{color:var(--slate);font-size:14px;margin-left:auto}
+  .barra{height:6px;background:var(--forest);border-radius:3px;margin:12px 0 6px;overflow:hidden}
+  .barra i{display:block;height:100%;width:0;background:var(--slate);border-radius:3px;transition:width .4s}
+  .cont{font-size:13px;color:var(--slate)}
+  .aviso{font-size:13px;color:var(--slate);margin:4px 0 0}
   .err{color:var(--sprout);font-size:13px;margin-top:6px;display:none}
   .field.bad .err{display:block}
-  .field.bad input,.field.bad .opt{border-color:var(--slate)}
+  .field.bad input{border-color:var(--slate)}
   button{width:100%;background:var(--lime);color:var(--forest);border:0;border-radius:8px;
     font:inherit;font-weight:700;font-size:16px;padding:14px 18px;cursor:pointer}
   button:hover{background:var(--sprout)}
   button[disabled]{opacity:.6;cursor:wait}
   .hp{position:absolute;left:-9999px}
-  .done{display:none;text-align:left}
-  .done h2{font-size:28px;font-weight:700;color:var(--white);margin:0 0 12px;letter-spacing:-.02em}
+  .box{display:none;background:var(--canopy);border:1px solid var(--fern);border-radius:12px;padding:24px 20px}
+  .box h2{font-size:26px;font-weight:700;color:var(--white);margin:0 0 10px;letter-spacing:-.02em}
+  .box p{margin:0}
   .foot{color:var(--slate);font-size:13px;margin-top:28px}
   @media (max-width:420px){ h1{font-size:34px} }
 </style>
@@ -58,11 +66,21 @@
   <section id="intro">
     <p class="eyebrow">Consultoria ao vivo · bônus da sua compra</p>
     <h1>Inscrição pra consultoria em grupo</h1>
-    <p class="lead">Você comprou entre os primeiros e tem direito à consultoria ao vivo comigo. Ela acontece em grupo, pelo Google Meet, no começo de dezembro.</p>
-    <p class="lead">Pra eu marcar a data, me diga em quais horários você consegue participar.<span id="prazo"></span></p>
+    <p class="lead">Como você foi um dos primeiros a comprar o Full Stack Marketing, tem vaga garantida na consultoria em grupo comigo, ao vivo pelo Google Meet.</p>
+    <p class="lead">Escolha uma das datas abaixo e faça sua inscrição.<span id="prazo"></span></p>
+  </section>
+
+  <section class="box" id="lotado">
+    <h2>Todas as vagas foram preenchidas.</h2>
+    <p>Em breve liberaremos uma nova data e avisaremos por e-mail quem ainda não se inscreveu.</p>
   </section>
 
   <form id="f" novalidate>
+    <fieldset class="field" id="datas-wrap">
+      <legend>Em qual data você quer participar?</legend>
+      <div id="datas"></div>
+      <div class="err">Escolha uma data com vaga.</div>
+    </fieldset>
     <div class="field" data-req>
       <label class="t" for="nome">Nome</label>
       <input id="nome" name="nome" type="text" autocomplete="name">
@@ -78,11 +96,6 @@
       <input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999">
       <div class="err">Coloque seu WhatsApp com DDD.</div>
     </div>
-    <fieldset class="field" id="horarios" data-req>
-      <legend>Em quais horários você consegue participar? <span class="hint">· marque todos que funcionam</span></legend>
-      <div id="opts"></div>
-      <div class="err">Marque pelo menos uma opção.</div>
-    </fieldset>
     <div class="field">
       <label class="t" for="levar">O que você quer levar pra consultoria? <span class="hint">· opcional</span></label>
       <textarea id="levar" name="levar" placeholder="Uma dúvida, um desafio do seu trabalho agora, um tema que quer ver..."></textarea>
@@ -92,66 +105,96 @@
     <div class="err" id="falha" style="margin-top:12px">Não consegui enviar. Confira sua conexão e tente de novo.</div>
   </form>
 
-  <section class="done" id="done">
+  <section class="box" id="done">
     <h2>Inscrição feita.</h2>
-    <p>Quando as inscrições fecharem, eu te aviso por WhatsApp e e-mail a data e o link do encontro.</p>
+    <p id="done-txt"></p>
   </section>
 
   <p class="foot">Arthur Dambros · Full Stack Marketing</p>
 </main>
 
 <script>
-/* CONFIG: datas, prazo e endereço do Apps Script que grava na planilha */
+/* CONFIG: as datas (o id tem que ser igual ao DATAS do Apps Script), o prazo e o endereço do Apps Script */
 const CONFIG = {
-  horarios: [
-    { id: "ter-01-12-19h", label: "Terça, 01/12", hora: "19h" },
-    { id: "qui-03-12-19h", label: "Quinta, 03/12", hora: "19h" },
-    { id: "ter-08-12-19h", label: "Terça, 08/12", hora: "19h" },
-    { id: "qui-10-12-19h", label: "Quinta, 10/12", hora: "19h" },
+  datas: [
+    { id: "ter-01-12", dia: "Terça, 01/12", hora: "19h" },
+    { id: "qui-03-12", dia: "Quinta, 03/12", hora: "19h" },
   ],
   prazo: "",          // ex: "20/11" (aparece no texto; vazio = não mostra)
-  endpoint: "https://script.google.com/macros/s/AKfycbywxvZ5NjsvxfERED9iVX2tXnZItdDBMDoDXFC30SPAqGFDimf7UFlO06BXEcYxIx2A/exec",       // URL do Web App do Apps Script (termina em /exec)
+  endpoint: "https://script.google.com/macros/s/AKfycbywxvZ5NjsvxfERED9iVX2tXnZItdDBMDoDXFC30SPAqGFDimf7UFlO06BXEcYxIx2A/exec",
 };
 
 const $ = s => document.querySelector(s);
-$("#opts").innerHTML = CONFIG.horarios.map(h =>
-  `<label class="opt"><input type="checkbox" name="horario" value="${h.id}"><span>${h.label}</span><small>${h.hora}</small></label>`).join("");
+const params = new URLSearchParams(location.search);
 if (CONFIG.prazo) $("#prazo").textContent = ` Inscrições até ${CONFIG.prazo}.`;
 
-const params = new URLSearchParams(location.search);
+$("#datas").innerHTML = CONFIG.datas.map(d => `
+  <label class="opt" id="opt-${d.id}">
+    <span class="opt-top"><input type="radio" name="data" value="${d.id}"><span class="dia">${d.dia}</span><span class="hora">${d.hora}</span></span>
+    <span class="barra"><i></i></span>
+    <span class="cont">Carregando vagas...</span>
+  </label>`).join("");
+
+let vagas = {};
+async function carregar() {
+  try {
+    const r = await fetch(CONFIG.endpoint + "?t=" + Date.now());
+    vagas = await r.json();
+  } catch (e) { return; }
+  let livres = 0;
+  for (const d of CONFIG.datas) {
+    const v = vagas[d.id]; if (!v) continue;
+    const resta = Math.max(v.vagas - v.inscritos, 0);
+    const opt = $("#opt-" + d.id), radio = opt.querySelector("input");
+    opt.querySelector(".barra i").style.width = Math.min(100, v.inscritos / v.vagas * 100) + "%";
+    opt.querySelector(".cont").textContent = resta === 0
+      ? `Vagas preenchidas · ${v.inscritos} inscritos`
+      : `${v.inscritos} de ${v.vagas} vagas preenchidas · ${resta === 1 ? "resta 1 vaga" : "restam " + resta + " vagas"}`;
+    opt.classList.toggle("cheia", resta === 0);
+    radio.disabled = resta === 0;
+    if (resta === 0) radio.checked = false;
+    livres += resta;
+  }
+  if (livres === 0 && Object.keys(vagas).length && $("#done").style.display !== "block") {
+    $("#f").style.display = "none"; $("#lotado").style.display = "block";
+  }
+}
+carregar();
+setInterval(carregar, 30000);
 
 $("#f").addEventListener("submit", async ev => {
   ev.preventDefault();
   const f = ev.target;
   if (f.site.value) return;
-  const marcados = [...document.querySelectorAll('input[name=horario]:checked')].map(c => c.value);
+  const escolhida = document.querySelector('input[name=data]:checked');
   const checks = {
+    data: !!escolhida,
     nome: f.nome.value.trim().length > 1,
     email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim()),
     whatsapp: f.whatsapp.value.replace(/\D/g, "").length >= 10,
-    horarios: marcados.length > 0,
   };
   let ok = true;
   for (const [k, v] of Object.entries(checks)) {
-    const el = k === "horarios" ? $("#horarios") : f[k].closest(".field");
+    const el = k === "data" ? $("#datas-wrap") : f[k].closest(".field");
     el.classList.toggle("bad", !v); if (!v) ok = false;
   }
   if (!ok) { document.querySelector(".bad").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
 
   const btn = $("#enviar"); btn.disabled = true; btn.textContent = "Enviando...";
   $("#falha").style.display = "none";
+  const d = CONFIG.datas.find(x => x.id === escolhida.value);
   const body = new URLSearchParams({
     nome: f.nome.value.trim(),
     email: f.email.value.trim().toLowerCase(),
     whatsapp: f.whatsapp.value.trim(),
-    horarios: marcados.join(", "),
+    data: d.id,
     levar: f.levar.value.trim(),
     origem: params.get("o") || "",
   });
   try {
-    if (!CONFIG.endpoint) throw new Error("sem endpoint");
     await fetch(CONFIG.endpoint, { method: "POST", mode: "no-cors", body });
     $("#f").style.display = "none"; $("#intro").style.display = "none";
+    $("#done-txt").textContent = `Sua vaga é na ${d.dia.toLowerCase()}, às ${d.hora}. Perto da data, eu te mando o link do encontro por e-mail e WhatsApp.`;
     $("#done").style.display = "block"; window.scrollTo(0, 0);
   } catch (e) {
     btn.disabled = false; btn.textContent = "Quero me inscrever";
