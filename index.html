@@ -186,7 +186,7 @@ async function carregar() {
     opt.querySelector(".barra i").style.width = Math.min(100, v.inscritos / v.vagas * 100) + "%";
     opt.querySelector(".cont").textContent = resta === 0
       ? `Vagas preenchidas · ${v.inscritos} inscritos`
-      : `${v.inscritos} de ${v.vagas} vagas preenchidas · ${resta === 1 ? "resta 1 vaga" : "restam " + resta + " vagas"}`;
+      : resta === 1 ? "1 vaga restante" : `${resta} vagas restantes`;
     opt.classList.toggle("cheia", resta === 0 && !teste);
     radio.disabled = resta === 0 && !teste;
     if (radio.disabled) radio.checked = false;
